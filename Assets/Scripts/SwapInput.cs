@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GlobalInput : MonoBehaviour {
+public class SwapInput : MonoBehaviour {
 	public TextMesh storyText;
 	public List<Noun> subjects;
 	public int subjectIndex = 0;
