@@ -20,17 +20,13 @@ public class GlobalInput : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			Verb connection = subjects[subjectIndex].FindObjectConnection(objects[objectIndex]);
-			objectIndex++;
-			if (objectIndex >= objects.Count)
-			{
-				objectIndex = 0;
-			}
+			objectIndex = (objectIndex + 1) % objects.Count;
 			if (objects[objectIndex] == subjects[subjectIndex])
 			{
-				objectIndex++;
+				objectIndex = (objectIndex + 1) % objects.Count;
 			}
 
-			// If the object is not being replaced, change the verb action to default of new object.
+			// If the object is not being replaced, change the verb action to default of new subject-object pair.
 			if (!Input.GetKey(KeyCode.LeftShift))
 			{
 				connection = subjects[subjectIndex].FindObjectDefaultConnection(objects[objectIndex]);
@@ -38,6 +34,27 @@ public class GlobalInput : MonoBehaviour {
 
 			subjects[subjectIndex].SetObjectConnection(objects[objectIndex], connection);
 			
+			UpdateStory();
+		}
+
+		// Increment target subject.
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Verb connection = subjects[subjectIndex].FindObjectConnection(objects[objectIndex]);
+			subjectIndex = (subjectIndex + 1) % subjects.Count;
+			if (subjects[subjectIndex] == objects[objectIndex])
+			{
+				subjectIndex = (subjectIndex + 1) % subjects.Count;
+			}
+
+			// If the subject is not being replaced, change the verb action to default of new subject-object pair.
+			if (!Input.GetKey(KeyCode.LeftShift))
+			{
+				connection = subjects[subjectIndex].FindObjectDefaultConnection(objects[objectIndex]);
+			}
+
+			subjects[subjectIndex].SetObjectConnection(objects[objectIndex], connection);
+
 			UpdateStory();
 		}
 	}
