@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class RipAndStickInput : MonoBehaviour {
 	public TextMesh storyText;
-	public List<Noun> subjects;
-	public int subjectIndex = 0;
-	public List<Noun> objects;
-	public int objectIndex = 0;
+	public Noun person;
+	public Noun wall;
+	public Inventory inventory;
+	public Vector3 personPos;
+	public Vector3 wallPos;
 
 	void Start()
 	{
@@ -16,44 +17,46 @@ public class RipAndStickInput : MonoBehaviour {
 
 	void Update()
 	{
-		// Remove wall
+		// Remove or place wall.
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
-			Verb connection = subjects[subjectIndex].FindObjectConnection(objects[objectIndex]);
-			objectIndex = (objectIndex + 1) % objects.Count;
-			if (objects[objectIndex] == subjects[subjectIndex])
+			if (Input.GetKey(KeyCode.LeftShift))
 			{
-				objectIndex = (objectIndex + 1) % objects.Count;
+				if (inventory.RemoveNoun(wall))
+				{
+					wall.transform.position = wallPos;
+				}
+			}
+			else
+			{
+				Vector3 tempPos = wall.transform.position;
+				if (inventory.AddNoun(wall))
+				{
+					wallPos = tempPos;
+				}
 			}
 
-			// If the object is not being replaced, change the verb action to default of new subject-object pair.
-			if (!Input.GetKey(KeyCode.LeftShift))
-			{
-				connection = subjects[subjectIndex].FindObjectDefaultConnection(objects[objectIndex]);
-			}
-
-			subjects[subjectIndex].SetObjectConnection(objects[objectIndex], connection);
-			
 			UpdateStory();
 		}
 
-		// Increment target subject.
+		// Remove or place person.
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Verb connection = subjects[subjectIndex].FindObjectConnection(objects[objectIndex]);
-			subjectIndex = (subjectIndex + 1) % subjects.Count;
-			if (subjects[subjectIndex] == objects[objectIndex])
+			if (Input.GetKey(KeyCode.LeftShift))
 			{
-				subjectIndex = (subjectIndex + 1) % subjects.Count;
+				if (inventory.RemoveNoun(person))
+				{
+					person.transform.position = personPos;
+				}
 			}
-
-			// If the subject is not being replaced, change the verb action to default of new subject-object pair.
-			if (!Input.GetKey(KeyCode.LeftShift))
+			else
 			{
-				connection = subjects[subjectIndex].FindObjectDefaultConnection(objects[objectIndex]);
+				Vector3 tempPos = person.transform.position;
+				if (inventory.AddNoun(person)) 
+				{
+					personPos = tempPos;
+				}
 			}
-
-			subjects[subjectIndex].SetObjectConnection(objects[objectIndex], connection);
 
 			UpdateStory();
 		}
@@ -61,6 +64,6 @@ public class RipAndStickInput : MonoBehaviour {
 
 	private void UpdateStory()
 	{
-		storyText.text = subjects[subjectIndex].id + " " + subjects[subjectIndex].FindObjectConnection(objects[objectIndex]).action + " " + objects[objectIndex].id;
+		//storyText.text = subjects[subjectIndex].id + " " + subjects[subjectIndex].FindObjectConnection(objects[objectIndex]).action + " " + objects[objectIndex].id;
 	}
 }
