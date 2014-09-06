@@ -28,6 +28,7 @@ public class MouseDrag : MonoBehaviour {
 
 			//check if mouse is grabbing the sprite
 			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask(new string[] {grabLayer})))
+			{
 				if (hit.transform != null)
 				{
 					sprite = hit.transform.gameObject;
@@ -40,7 +41,10 @@ public class MouseDrag : MonoBehaviour {
 					spriteToMouse = mouseCoordinates - spriteCoordinates;
 					//save the z value of sprite
 					temp.z = sprite.transform.position.z;
-				}				
+					
+					sprite.SendMessage("MouseDown", SendMessageOptions.DontRequireReceiver);
+				}	
+			}
 		}
 		if (Input.GetMouseButton(0))
 		{
@@ -55,12 +59,15 @@ public class MouseDrag : MonoBehaviour {
 					temp.x = sprite.transform.position.x;
 					temp.y = sprite.transform.position.y;
 					sprite.transform.position = temp;
+
+					sprite.SendMessage("MouseHold", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 		}
 
 		if (Input.GetMouseButtonUp(0))
 		{
+			sprite.SendMessage("MouseUp", SendMessageOptions.DontRequireReceiver);
 			spriteSelected = false;
 			sprite = null;
 		}
