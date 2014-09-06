@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class Noun : MonoBehaviour {
 	public string id;
 	public bool possibleSubject;
-	public bool inInventory; // TODO take this out when collisions are a thing.
+	public bool inInventory;
+	public GameObject container;
 	public GameObject outline;
 	public List<ObjectVerb> objectVerbs;
 	[HideInInspector]
@@ -13,12 +14,63 @@ public class Noun : MonoBehaviour {
 
 	void Start () 
 	{
+		GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().allNouns.Add(this);
+
+		if (container == null && transform.parent != null)
+		{
+			container = transform.parent.gameObject;
+		}
+
+		if (inInventory)
+		{
+			Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+			inventory.AddNoun(this);
+		}
+
 		if (objectVerbs == null)
 		{
 			objectVerbs = new List<ObjectVerb>();
 		}
 		objectDefaultVerbs = new List<ObjectVerb>();
 		ResetDefaultVerbsToCurrent();
+	}
+
+	public void DisplayInPage()
+	{
+		if (container != null)
+		{
+			container.SetActive(true);
+		}
+		else
+		{
+			if (!inInventory)
+			{
+				gameObject.SetActive(true);
+			}
+			if (outline != null)
+			{
+				outline.SetActive(true);
+			}
+		}
+	}
+
+	public void HideInPage()
+	{
+		if (container != null)
+		{
+			container.SetActive(false);
+		}
+		else
+		{
+			if (!inInventory)
+			{
+				gameObject.SetActive(false);
+			}
+			if (outline != null)
+			{
+				outline.SetActive(false);
+			}
+		}
 	}
 
 	private void ResetDefaultVerbsToCurrent() 
@@ -114,6 +166,35 @@ public class Noun : MonoBehaviour {
 			inventory.AddNoun(this);
 			inInventory = true;
 		}
+
+		// TODO: Rather than checking page definitions, this should be based off of connected objects.
+		// Modify connected objects on the following page, depending on existence in page or inventory.
+		PageManager pageManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>();
+		if (pageManager.PageIndex < pageManager.pages.Count - 1)
+		{
+			NounPlacement placeInPage = pageManager.FindNounPlacement(pageManager.PageIndex, this);
+			if (placeInPage != null && placeInPage.startAction != null && placeInPage.startAction.obj != null && placeInPage.startAction.verb != null)
+			{
+				NounPlacement objPlaceInNext = pageManager.FindNounPlacement(pageManager.PageIndex + 1, placeInPage.startAction.obj);
+				if (objPlaceInNext != null && objPlaceInNext.startAction != null && objPlaceInNext.startAction.verb != null)
+				{
+					VerbTag verbEffect = placeInPage.startAction.verb.FindRelatedTag(objPlaceInNext.startAction.verb.type);
+					if (verbEffect != null)
+					{
+						if (inInventory && objPlaceInNext.startAction.modifiedBy == this)
+						{
+							objPlaceInNext.startAction.modifier = VerbTag.Relationship.NONE;
+							objPlaceInNext.startAction.modifiedBy = null;
+						}
+						else if (!inInventory && objPlaceInNext.startAction.modifiedBy == null)
+						{
+							objPlaceInNext.startAction.modifier = verbEffect.relationship;
+							objPlaceInNext.startAction.modifiedBy = this;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -122,6 +203,8 @@ public class ObjectVerb
 {
 	public Noun obj;
 	public Verb verb;
+	public VerbTag.Relationship modifier;
+	public Noun modifiedBy;
 	
 	public ObjectVerb(Noun obj, Verb verb)
 	{

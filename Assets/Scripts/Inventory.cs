@@ -28,10 +28,7 @@ public class Inventory : MonoBehaviour
 		noun.transform.localPosition = new Vector3(itemSpacing * nouns.Count, 0, 0);
 		nouns.Add(noun);
 
-		if (noun.outline != null)
-		{
-			noun.outline.SetActive(false);
-		}
+		noun.HideInPage();
 		
 		return true;
 	}
@@ -53,13 +50,17 @@ public class Inventory : MonoBehaviour
 
 		nouns.RemoveAt(foundIndex);
 		Vector3 scale = noun.transform.localScale;
-		noun.transform.parent = null;
-		noun.transform.localScale = scale;
-	
-		if (noun.outline != null)
+		if (noun.container != null)
 		{
-			noun.outline.SetActive(true);
+			noun.transform.parent = noun.container.transform;
 		}
+		else
+		{
+			noun.transform.parent = null;
+		}
+		noun.transform.localScale = scale;
+
+		noun.DisplayInPage();
 
 		for (int i = foundIndex; i < nouns.Count; i++)
 		{
