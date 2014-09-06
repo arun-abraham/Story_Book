@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Noun : MonoBehaviour {
 	public string id;
 	public bool possibleSubject;
+	public bool inInventory; // TODO take this out when collisions are a thing.
+	public GameObject outline;
 	public List<ObjectVerb> objectVerbs;
 	[HideInInspector]
 	public List<ObjectVerb> objectDefaultVerbs;
@@ -17,11 +19,6 @@ public class Noun : MonoBehaviour {
 		}
 		objectDefaultVerbs = new List<ObjectVerb>();
 		ResetDefaultVerbsToCurrent();
-	}
-
-	void Update () 
-	{
-		
 	}
 
 	private void ResetDefaultVerbsToCurrent() 
@@ -96,22 +93,45 @@ public class Noun : MonoBehaviour {
 		return connection;
 	}
 
-	[System.Serializable]
-	public class ObjectVerb
+	private void SnapToOutline()
 	{
-		public Noun obj;
-		public Verb verb;
+		Vector3 newPos = outline.transform.position;
+		newPos.z = outline.transform.position.z + 1;
+		transform.position = newPos;
+	}
 
-		public ObjectVerb(Noun obj, Verb verb)
+	public void MouseUp()
+	{
+		Inventory inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+		if (inInventory)
 		{
-			this.obj = obj;
-			this.verb = verb;
+			inventory.RemoveNoun(this);
+			SnapToOutline();
+			inInventory = false;
 		}
+		else
+		{
+			inventory.AddNoun(this);
+			inInventory = true;
+		}
+	}
+}
 
-		public ObjectVerb(ObjectVerb original)
-		{
-			this.obj = original.obj;
-			this.verb = original.verb;
-		}
+[System.Serializable]
+public class ObjectVerb
+{
+	public Noun obj;
+	public Verb verb;
+	
+	public ObjectVerb(Noun obj, Verb verb)
+	{
+		this.obj = obj;
+		this.verb = verb;
+	}
+	
+	public ObjectVerb(ObjectVerb original)
+	{
+		this.obj = original.obj;
+		this.verb = original.verb;
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MouseDrag : MonoBehaviour {
 
-	public GameObject sprite;
+	private GameObject sprite;
 	private Vector3 spriteCoordinates;
 	private Vector3 mouseCoordinates;
 	private Vector3 spriteToMouse; 
@@ -11,6 +11,8 @@ public class MouseDrag : MonoBehaviour {
 	private RaycastHit hit;
 	private bool spriteSelected;
 	private Vector3 temp;
+	public string grabLayer;
+
 	// Use this for initialization
 	void Start () {
 		hit = new RaycastHit ();
@@ -22,28 +24,32 @@ public class MouseDrag : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0))
 		{
-				//spriteCoordinates = Camera.main.WorldToScreenPoint (sprite.transform.position);
+			//spriteCoordinates = Camera.main.WorldToScreenPoint (sprite.transform.position);
 
 			//check if mouse is grabbing the sprite
-			if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-				if(hit.transform.gameObject == sprite)
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, LayerMask.GetMask(new string[] {grabLayer})))
+			{
+				if (hit.transform != null)
 				{
+					sprite = hit.transform.gameObject;
 					spriteSelected = true;
 					//Get the current pixel coords of mouse
 					mouseCoordinates = Input.mousePosition;
 					//find the current pixel coords of sprite
-					spriteCoordinates = Camera.main.WorldToScreenPoint (sprite.transform.position);
+					spriteCoordinates = Camera.main.WorldToScreenPoint(sprite.transform.position);
 					//calculate relative distance
 					spriteToMouse = mouseCoordinates - spriteCoordinates;
 					//save the z value of sprite
-					temp.z = sprite.transform.position.z;					
-				}
-
+					temp.z = sprite.transform.position.z;
+					
+					sprite.SendMessage("MouseDown", SendMessageOptions.DontRequireReceiver);
+				}	
+			}
 		}
 		if (Input.GetMouseButton(0))
 		{
 			// Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (spriteSelected)
+			if (spriteSelected && sprite != null)
 			{
 				{
 					mouseCoordinates = Input.mousePosition;
@@ -53,11 +59,20 @@ public class MouseDrag : MonoBehaviour {
 					temp.x = sprite.transform.position.x;
 					temp.y = sprite.transform.position.y;
 					sprite.transform.position = temp;
+
+					sprite.SendMessage("MouseHold", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 		}
 
 		if (Input.GetMouseButtonUp(0))
-			spriteSelected = false;
+		{
+			if (sprite != null)
+			{
+				sprite.SendMessage("MouseUp", SendMessageOptions.DontRequireReceiver);
+				spriteSelected = false;
+				sprite = null;
+			}
+		}
 	}
 }
