@@ -67,9 +67,12 @@ public class MouseDrag : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp(0))
 		{
-			sprite.SendMessage("MouseUp", SendMessageOptions.DontRequireReceiver);
-			spriteSelected = false;
-			sprite = null;
+			if (sprite != null)
+			{
+				sprite.SendMessage("MouseUp", SendMessageOptions.DontRequireReceiver);
+				spriteSelected = false;
+				sprite = null;
+			}
 		}
 	}
 }
