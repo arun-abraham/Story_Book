@@ -6,16 +6,26 @@ public class Noun : MonoBehaviour {
 	public string id;
 	public bool possibleSubject;
 	public bool inInventory;
+	public bool InPage
+	{
+		get
+		{
+			return !inInventory && firstPage <= PageManager.Instance.PageIndex;
+		}
+	}
 	public GameObject container;
 	public GameObject outline;
 	public List<ObjectVerb> objectVerbs;
 	[HideInInspector]
 	public List<ObjectVerb> objectDefaultVerbs;
 	public int firstPage = -1;
+	public bool requiredInPage;
+	public int entangledInPage = -1;
+	public bool defaultGrabbable;
 
 	void Start () 
 	{
-		GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().allNouns.Add(this);
+		PageManager.Instance.allNouns.Add(this);
 
 		if (container == null && transform.parent != null)
 		{
@@ -51,6 +61,24 @@ public class Noun : MonoBehaviour {
 			if (outline != null)
 			{
 				outline.SetActive(true);
+			}
+		}
+
+		// Only allow the noun to be grabbed if it is flagged as grabbable and not entangled in a previous page.
+		if (defaultGrabbable && (entangledInPage < 0 || entangledInPage >= PageManager.Instance.PageIndex))
+		{
+			gameObject.layer = LayerMask.NameToLayer("Grabbable");
+			if (outline != null)
+			{
+				outline.SetActive(true);
+			}
+		}
+		else
+		{
+			gameObject.layer = LayerMask.NameToLayer("Default");
+			if (outline != null)
+			{
+				outline.SetActive(false);
 			}
 		}
 	}
@@ -168,15 +196,20 @@ public class Noun : MonoBehaviour {
 			inInventory = true;
 		}
 
+		PageManager.Instance.UpdatePageNumber();
+		AffectNextPage();
+	}
+
+	public void AffectNextPage()
+	{
 		// TODO: Rather than checking page definitions, this should be based off of connected objects.
 		// Modify connected objects on the following page, depending on existence in page or inventory.
-		PageManager pageManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>();
-		if (pageManager.PageIndex < pageManager.pages.Count - 1)
+		if (PageManager.Instance.PageIndex < PageManager.Instance.pages.Count - 1)
 		{
-			NounPlacement placeInPage = pageManager.FindNounPlacement(pageManager.PageIndex, this);
+			NounPlacement placeInPage = PageManager.Instance.FindNounPlacement(PageManager.Instance.PageIndex, this);
 			if (placeInPage != null && placeInPage.startAction != null && placeInPage.startAction.obj != null && placeInPage.startAction.verb != null)
 			{
-				NounPlacement objPlaceInNext = pageManager.FindNounPlacement(pageManager.PageIndex + 1, placeInPage.startAction.obj);
+				NounPlacement objPlaceInNext = PageManager.Instance.FindNounPlacement(PageManager.Instance.PageIndex + 1, placeInPage.startAction.obj);
 				if (objPlaceInNext != null && objPlaceInNext.startAction != null && objPlaceInNext.startAction.verb != null)
 				{
 					VerbTag verbEffect = placeInPage.startAction.verb.FindRelatedTag(objPlaceInNext.startAction.verb.type);
@@ -186,11 +219,13 @@ public class Noun : MonoBehaviour {
 						{
 							objPlaceInNext.startAction.modifier = VerbTag.Relationship.NONE;
 							objPlaceInNext.startAction.modifiedBy = null;
+							entangledInPage = -1;
 						}
-						else if (!inInventory && objPlaceInNext.startAction.modifiedBy == null)
+						else if (!inInventory && (objPlaceInNext.startAction.modifiedBy == null || objPlaceInNext.startAction.modifiedBy == this))
 						{
 							objPlaceInNext.startAction.modifier = verbEffect.relationship;
 							objPlaceInNext.startAction.modifiedBy = this;
+							entangledInPage = PageManager.Instance.PageIndex;
 						}
 					}
 				}
@@ -204,9 +239,12 @@ public class ObjectVerb
 {
 	public Noun obj;
 	public Verb verb;
+	public bool blocksProgress;
 	public VerbTag.Relationship modifier;
 	public Noun modifiedBy;
-	
+	public Narrative eventDialog;
+	public bool displayDialog;
+
 	public ObjectVerb(Noun obj, Verb verb)
 	{
 		this.obj = obj;
