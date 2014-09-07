@@ -242,7 +242,9 @@ public class ObjectVerb
 	public bool blocksProgress;
 	public VerbTag.Relationship modifier;
 	public Noun modifiedBy;
-	
+	public Narrative eventDialog;
+	public bool displayDialog;
+
 	public ObjectVerb(Noun obj, Verb verb)
 	{
 		this.obj = obj;

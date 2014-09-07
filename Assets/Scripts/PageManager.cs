@@ -65,18 +65,41 @@ public class PageManager : MonoBehaviour {
 			{
 				pageNoun.DisplayInPage();
 				
-				VerbTag.Relationship startActionModifier = VerbTag.Relationship.NONE;
-				if (pageNouns[i].startAction != null)
-				{
-					startActionModifier = pageNouns[i].startAction.modifier;
-				}
+				
 				Transform controlledTransform = pageNoun.transform;
 				if (pageNoun.container != null)
 				{
 					controlledTransform = pageNoun.container.transform;
 				}
-				
+
+				VerbTag.Relationship startActionModifier = VerbTag.Relationship.NONE;
 				bool nounModified = false;
+				if (pageNouns[i].startAction != null)
+				{
+					startActionModifier = pageNouns[i].startAction.modifier;
+					// Determine if dialog text should be shown.
+					if (pageNouns[i].startAction.displayDialog)
+					{
+						// If the action was modified, and the modification has dialog, us that.
+						bool displayedModification = false;
+						if (pageNouns[i].startAction.modifiedBy != null)
+						{
+							NounPlacement placeOfModifiedBy = FindNounPlacement(pageIndex - 1, pageNouns[i].startAction.modifiedBy);
+							if (placeOfModifiedBy != null && placeOfModifiedBy.startAction != null && placeOfModifiedBy.startAction.eventDialog != null)
+							{
+								NarrativeManager.Instance.nextDialog = placeOfModifiedBy.startAction.eventDialog;
+								placeOfModifiedBy.startAction.eventDialog = null;
+								displayedModification = true;
+							}
+						}
+						// If no modification was displayed, use the actions dialog.
+						if (!displayedModification && pageNouns[i].startAction.eventDialog != null)
+						{
+							NarrativeManager.Instance.nextDialog = pageNouns[i].startAction.eventDialog;
+							pageNouns[i].startAction.eventDialog = null;
+						}
+					}
+				}
 				if (pageIndex > 0)
 				{
 					NounPlacement placeInPrev = FindNounPlacement(pageIndex - 1, pageNoun);
@@ -102,6 +125,13 @@ public class PageManager : MonoBehaviour {
 		}
 
 		UpdatePageNumber();
+
+		if (pages[pageIndex].startDialog != null)
+		{
+			NarrativeManager.Instance.nextDialog = pages[pageIndex].startDialog;
+			pages[pageIndex].startDialog = null;
+		}
+		NarrativeManager.Instance.PlayDialog();
 	}
 
 	public void HidePage()
@@ -209,7 +239,8 @@ public class PageManager : MonoBehaviour {
 public class Page
 {
 	public List<NounPlacement> nounPlacements;
-	bool sharePrevSetting;
+	//public bool sharePrevSetting; not used yet
+	public Narrative startDialog;
 }
 
 [System.Serializable]

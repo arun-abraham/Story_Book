@@ -127,6 +127,7 @@ GameObject:
   - 114: {fileID: 111297221}
   - 114: {fileID: 111297222}
   - 114: {fileID: 111297219}
+  - 114: {fileID: 111297223}
   m_Layer: 0
   m_Name: Globals
   m_TagString: Globals
@@ -193,6 +194,9 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
+    startDialog: {fileID: 2139233738}
   - nounPlacements:
     - noun: {fileID: 1324702005}
       startPosition: {x: -3, y: 0, z: 0}
@@ -202,6 +206,8 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
     - noun: {fileID: 397250625}
       startPosition: {x: -1, y: 0, z: 0}
       startAction:
@@ -210,23 +216,9 @@ MonoBehaviour:
         blocksProgress: 1
         modifier: 0
         modifiedBy: {fileID: 0}
-  - nounPlacements:
-    - noun: {fileID: 1324702005}
-      startPosition: {x: -3, y: 0, z: 0}
-      startAction:
-        obj: {fileID: 0}
-        verb: {fileID: 0}
-        blocksProgress: 0
-        modifier: 0
-        modifiedBy: {fileID: 0}
-    - noun: {fileID: 397250625}
-      startPosition: {x: -1, y: 0, z: 0}
-      startAction:
-        obj: {fileID: 0}
-        verb: {fileID: 0}
-        blocksProgress: 0
-        modifier: 0
-        modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
+    startDialog: {fileID: 2139233735}
   - nounPlacements:
     - noun: {fileID: 1324702005}
       startPosition: {x: 3, y: 0, z: 0}
@@ -236,6 +228,8 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
     - noun: {fileID: 1517328737}
       startPosition: {x: -5, y: 0, z: 0}
       startAction:
@@ -244,6 +238,8 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 2139233744}
+        displayDialog: 0
     - noun: {fileID: 397250625}
       startPosition: {x: -1, y: 0, z: 0}
       startAction:
@@ -252,6 +248,9 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 2139233741}
+        displayDialog: 0
+    startDialog: {fileID: 2139233745}
   - nounPlacements:
     - noun: {fileID: 1324702005}
       startPosition: {x: 4, y: 0, z: 0}
@@ -261,6 +260,8 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
     - noun: {fileID: 1517328737}
       startPosition: {x: 2.60736299, y: 0, z: 0}
       startAction:
@@ -269,6 +270,8 @@ MonoBehaviour:
         blocksProgress: 1
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 2139233744}
+        displayDialog: 1
     - noun: {fileID: 397250625}
       startPosition: {x: -1, y: 0, z: 0}
       startAction:
@@ -277,6 +280,9 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
+    startDialog: {fileID: 0}
   - nounPlacements:
     - noun: {fileID: 1324702005}
       startPosition: {x: 5, y: 0, z: 0}
@@ -286,7 +292,23 @@ MonoBehaviour:
         blocksProgress: 0
         modifier: 0
         modifiedBy: {fileID: 0}
+        eventDialog: {fileID: 0}
+        displayDialog: 0
+    startDialog: {fileID: 0}
   allNouns: []
+--- !u!114 &111297223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111297218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292baba98c328b84c85b6f1b26d6bfa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextDialog: {fileID: 0}
+  dialogText: {fileID: 1619419708}
 --- !u!1 &391223297
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +693,54 @@ Transform:
   - {fileID: 1324702009}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1001 &1258635797
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_RootMapOrder
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+  m_RootGameObject: {fileID: 2139233734}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1324702004
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,11 +783,15 @@ MonoBehaviour:
     blocksProgress: 0
     modifier: 0
     modifiedBy: {fileID: 0}
+    eventDialog: {fileID: 0}
+    displayDialog: 0
   - obj: {fileID: 0}
     verb: {fileID: 0}
     blocksProgress: 0
     modifier: 0
     modifiedBy: {fileID: 0}
+    eventDialog: {fileID: 0}
+    displayDialog: 0
   objectDefaultVerbs: []
   firstPage: -1
   requiredInPage: 1
@@ -970,6 +1044,76 @@ MonoBehaviour:
   requiredInPage: 0
   entangledInPage: -1
   defaultGrabbable: 0
+--- !u!1 &1619419707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1619419710}
+  - 23: {fileID: 1619419709}
+  - 102: {fileID: 1619419708}
+  m_Layer: 0
+  m_Name: Dialog Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &1619419708
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619419707}
+  m_Text: 
+  m_OffsetZ: 0
+  m_CharacterSize: .100000001
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 20
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1619419709
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619419707}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!4 &1619419710
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619419707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.21818638, y: -2.22445869, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &1633078753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,3 +1389,307 @@ Prefab:
   m_RootGameObject: {fileID: 1324702004}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &2139233734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2139233753}
+  - 114: {fileID: 2139233752}
+  - 114: {fileID: 2139233751}
+  - 114: {fileID: 2139233750}
+  - 114: {fileID: 2139233749}
+  - 114: {fileID: 2139233748}
+  - 114: {fileID: 2139233738}
+  - 114: {fileID: 2139233739}
+  - 114: {fileID: 2139233740}
+  - 114: {fileID: 2139233735}
+  - 114: {fileID: 2139233736}
+  - 114: {fileID: 2139233737}
+  - 114: {fileID: 2139233747}
+  - 114: {fileID: 2139233746}
+  - 114: {fileID: 2139233745}
+  - 114: {fileID: 2139233744}
+  - 114: {fileID: 2139233743}
+  - 114: {fileID: 2139233742}
+  - 114: {fileID: 2139233741}
+  m_Layer: 0
+  m_Name: Narrative Script Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2139233735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400030, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Sometimes there were walls in the way, walls that went on
+    for miles!'
+  nextNar: {fileID: 2139233736}
+--- !u!114 &2139233736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400028, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: Why would someone block the way to school?'
+  nextNar: {fileID: 2139233737}
+--- !u!114 &2139233737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400026, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: To keep the wolves out, of course.'
+  nextNar: {fileID: 0}
+--- !u!114 &2139233738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Back in my day, we used to have to walk to school every day,
+    and it was uphill both ways!'
+  nextNar: {fileID: 2139233739}
+--- !u!114 &2139233739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400034, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandson: Both ways? That doesn\u2019t make any sense."
+  nextNar: {fileID: 2139233740}
+--- !u!114 &2139233740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400032, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Oh it will, just you listen.'
+  nextNar: {fileID: 0}
+--- !u!114 &2139233741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Take that you cowards! I could take any one of you one on
+    one!'
+  nextNar: {fileID: 0}
+--- !u!114 &2139233742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: Yeah! Wait...hmm, maybe that wasn\u2019t quite how it went.
+    Now, where was I?"
+  nextNar: {fileID: 0}
+--- !u!114 &2139233743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400016, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: ...you died, Grandpa?'
+  nextNar: {fileID: 2139233742}
+--- !u!114 &2139233744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: and then I died!'
+  nextNar: {fileID: 2139233743}
+--- !u!114 &2139233745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400020, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Then I was attacked by a pack of wolves! I told you those
+    walls were there for a reason.'
+  nextNar: {fileID: 0}
+--- !u!114 &2139233746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400022, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: Easy! I just pretended it wasn\u2019t even there."
+  nextNar: {fileID: 0}
+--- !u!114 &2139233747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400024, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: So how did you get past it?'
+  nextNar: {fileID: 2139233746}
+--- !u!114 &2139233748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: That\u2019s nothing. Sit down and let me tell you what it
+    was like to get to school in my day."
+  nextNar: {fileID: 0}
+--- !u!114 &2139233749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: and it was raining the whole way there!'
+  nextNar: {fileID: 2139233748}
+--- !u!114 &2139233750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: So?'
+  nextNar: {fileID: 2139233749}
+--- !u!114 &2139233751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: I missed the bus and had to walk all the way to school, so I
+    was late and the teacher was mad.'
+  nextNar: {fileID: 2139233750}
+--- !u!114 &2139233752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 8b3ceba6e40f27440943cfb1cdf46ce1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: You''ve been moping around lately, what''s got you down sonny?'
+  nextNar: {fileID: 2139233751}
+--- !u!4 &2139233753
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 8b3ceba6e40f27440943cfb1cdf46ce1, type: 2}
+  m_PrefabInternal: {fileID: 1258635797}
+  m_GameObject: {fileID: 2139233734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
