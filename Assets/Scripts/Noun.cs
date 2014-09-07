@@ -20,6 +20,8 @@ public class Noun : MonoBehaviour {
 	public List<ObjectVerb> objectDefaultVerbs;
 	public int firstPage = -1;
 	public bool requiredInPage;
+	public int entangledInPage = -1;
+	public bool defaultGrabbable;
 
 	void Start () 
 	{
@@ -59,6 +61,24 @@ public class Noun : MonoBehaviour {
 			if (outline != null)
 			{
 				outline.SetActive(true);
+			}
+		}
+
+		// Only allow the noun to be grabbed if it is flagged as grabbable and not entangled in a previous page.
+		if (defaultGrabbable && (entangledInPage < 0 || entangledInPage >= PageManager.Instance.PageIndex))
+		{
+			gameObject.layer = LayerMask.NameToLayer("Grabbable");
+			if (outline != null)
+			{
+				outline.SetActive(true);
+			}
+		}
+		else
+		{
+			gameObject.layer = LayerMask.NameToLayer("Default");
+			if (outline != null)
+			{
+				outline.SetActive(false);
 			}
 		}
 	}
@@ -184,13 +204,12 @@ public class Noun : MonoBehaviour {
 	{
 		// TODO: Rather than checking page definitions, this should be based off of connected objects.
 		// Modify connected objects on the following page, depending on existence in page or inventory.
-		PageManager pageManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>();
-		if (pageManager.PageIndex < pageManager.pages.Count - 1)
+		if (PageManager.Instance.PageIndex < PageManager.Instance.pages.Count - 1)
 		{
-			NounPlacement placeInPage = pageManager.FindNounPlacement(pageManager.PageIndex, this);
+			NounPlacement placeInPage = PageManager.Instance.FindNounPlacement(PageManager.Instance.PageIndex, this);
 			if (placeInPage != null && placeInPage.startAction != null && placeInPage.startAction.obj != null && placeInPage.startAction.verb != null)
 			{
-				NounPlacement objPlaceInNext = pageManager.FindNounPlacement(pageManager.PageIndex + 1, placeInPage.startAction.obj);
+				NounPlacement objPlaceInNext = PageManager.Instance.FindNounPlacement(PageManager.Instance.PageIndex + 1, placeInPage.startAction.obj);
 				if (objPlaceInNext != null && objPlaceInNext.startAction != null && objPlaceInNext.startAction.verb != null)
 				{
 					VerbTag verbEffect = placeInPage.startAction.verb.FindRelatedTag(objPlaceInNext.startAction.verb.type);
@@ -200,11 +219,13 @@ public class Noun : MonoBehaviour {
 						{
 							objPlaceInNext.startAction.modifier = VerbTag.Relationship.NONE;
 							objPlaceInNext.startAction.modifiedBy = null;
+							entangledInPage = -1;
 						}
-						else if (!inInventory && objPlaceInNext.startAction.modifiedBy == null)
+						else if (!inInventory && (objPlaceInNext.startAction.modifiedBy == null || objPlaceInNext.startAction.modifiedBy == this))
 						{
 							objPlaceInNext.startAction.modifier = verbEffect.relationship;
 							objPlaceInNext.startAction.modifiedBy = this;
+							entangledInPage = PageManager.Instance.PageIndex;
 						}
 					}
 				}
