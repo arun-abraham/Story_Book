@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
 		noun.transform.parent = transform;
 		noun.transform.localScale = scale;
 		noun.transform.localPosition = new Vector3(itemSpacing * nouns.Count, 0, 0);
+		noun.firstPage = -1;
 		nouns.Add(noun);
 
 		noun.HideInPage();
@@ -59,6 +60,7 @@ public class Inventory : MonoBehaviour
 			noun.transform.parent = null;
 		}
 		noun.transform.localScale = scale;
+		noun.firstPage = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().PageIndex;
 
 		noun.DisplayInPage();
 

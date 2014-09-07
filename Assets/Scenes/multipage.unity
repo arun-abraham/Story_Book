@@ -378,6 +378,7 @@ MonoBehaviour:
   outline: {fileID: 391223297}
   objectVerbs: []
   objectDefaultVerbs: []
+  firstPage: -1
 --- !u!23 &397250626
 Renderer:
   m_ObjectHideFlags: 0
@@ -704,6 +705,7 @@ MonoBehaviour:
     modifier: 0
     modifiedBy: {fileID: 0}
   objectDefaultVerbs: []
+  firstPage: -1
 --- !u!23 &1324702006
 Renderer:
   m_ObjectHideFlags: 0
@@ -947,6 +949,7 @@ MonoBehaviour:
   outline: {fileID: 82617702}
   objectVerbs: []
   objectDefaultVerbs: []
+  firstPage: -1
 --- !u!1 &1633078753
 GameObject:
   m_ObjectHideFlags: 0

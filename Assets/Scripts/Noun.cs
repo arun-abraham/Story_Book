@@ -11,6 +11,7 @@ public class Noun : MonoBehaviour {
 	public List<ObjectVerb> objectVerbs;
 	[HideInInspector]
 	public List<ObjectVerb> objectDefaultVerbs;
+	public int firstPage = -1;
 
 	void Start () 
 	{

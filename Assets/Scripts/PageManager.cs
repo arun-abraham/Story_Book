@@ -13,6 +13,22 @@ public class PageManager : MonoBehaviour {
 	public List<Page> pages;
 	public List<Noun> allNouns = new List<Noun>();
 
+	void Start()
+	{
+		// Set nouns' first pages based on when they appear in noun placements.
+		for (int i = 0; i < pages.Count; i++)
+		{
+			for (int j = 0; j < pages[i].nounPlacements.Count; j++)
+			{
+				Noun noun = pages[i].nounPlacements[j].noun;
+				if (!noun.inInventory && (noun.firstPage < 0 || noun.firstPage > i))
+				{
+					noun.firstPage = i;
+				}
+			}
+		}
+	}
+
 	void Update()
 	{
 		if (pageIndex < 0)
@@ -32,7 +48,7 @@ public class PageManager : MonoBehaviour {
 		for (int i = 0; i < pageNouns.Count; i++)
 		{
 			Noun pageNoun = pageNouns[i].noun;
-			if (!pageNoun.inInventory)
+			if (!pageNoun.inInventory && pageIndex >= pageNoun.firstPage)
 			{
 				pageNoun.DisplayInPage();
 				VerbTag.Relationship startActionModifier = VerbTag.Relationship.NONE;
