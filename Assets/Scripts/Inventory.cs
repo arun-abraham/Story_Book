@@ -26,12 +26,10 @@ public class Inventory : MonoBehaviour
 		noun.transform.parent = transform;
 		noun.transform.localScale = scale;
 		noun.transform.localPosition = new Vector3(itemSpacing * nouns.Count, 0, 0);
+		noun.firstPage = -1;
 		nouns.Add(noun);
 
-		if (noun.outline != null)
-		{
-			noun.outline.SetActive(false);
-		}
+		noun.HideInPage();
 		
 		return true;
 	}
@@ -53,13 +51,18 @@ public class Inventory : MonoBehaviour
 
 		nouns.RemoveAt(foundIndex);
 		Vector3 scale = noun.transform.localScale;
-		noun.transform.parent = null;
-		noun.transform.localScale = scale;
-	
-		if (noun.outline != null)
+		if (noun.container != null)
 		{
-			noun.outline.SetActive(true);
+			noun.transform.parent = noun.container.transform;
 		}
+		else
+		{
+			noun.transform.parent = null;
+		}
+		noun.transform.localScale = scale;
+		noun.firstPage = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().PageIndex;
+
+		noun.DisplayInPage();
 
 		for (int i = foundIndex; i < nouns.Count; i++)
 		{
