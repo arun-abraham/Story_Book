@@ -3,13 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PageManager : MonoBehaviour {
+	private static PageManager instance = null;
+	public static PageManager Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>();
+			}
+			return instance;
+		}
+	}
 	private int pageIndex = -1;
 	public int PageIndex
 	{
 		get { return pageIndex; }
 	}
-	public int startPage = 0;
+	public int startPage = 1;
 	public TextMesh pageNumberText;
+	public Inventory inventory;
 	public List<Page> pages;
 	public List<Noun> allNouns = new List<Noun>();
 
@@ -37,7 +50,7 @@ public class PageManager : MonoBehaviour {
 			{
 				noun.HideInPage();
 			}
-			pageIndex = startPage;
+			pageIndex = startPage - 1;
 			DisplayPage();
 		}
 	}
@@ -51,6 +64,7 @@ public class PageManager : MonoBehaviour {
 			if (!pageNoun.inInventory && pageIndex >= pageNoun.firstPage)
 			{
 				pageNoun.DisplayInPage();
+				
 				VerbTag.Relationship startActionModifier = VerbTag.Relationship.NONE;
 				if (pageNouns[i].startAction != null)
 				{
@@ -78,18 +92,16 @@ public class PageManager : MonoBehaviour {
 					}
 				}
 				
-				
 				if (!nounModified)
 				{
 					controlledTransform.position = pageNouns[i].startPosition;
 				}
+
+				pageNoun.AffectNextPage();
 			}
 		}
 
-		if (pageNumberText != null)
-		{
-			pageNumberText.text = "" + (pageIndex + 1);
-		}
+		UpdatePageNumber();
 	}
 
 	public void HidePage()
@@ -116,7 +128,7 @@ public class PageManager : MonoBehaviour {
 
 	public void NextPage()
 	{
-		if (pageIndex < pages.Count - 1)
+		if (pageIndex < pages.Count - 1 && IsProgressable())
 		{
 			HidePage();
 			pageIndex++;
@@ -136,6 +148,60 @@ public class PageManager : MonoBehaviour {
 			}
 		}
 		return nounPlacement;
+	}
+
+	public bool IsProgressable()
+	{
+		bool progressable = true;
+
+		// Prohibit progress if any nouns required for progress are not on the page.
+		for (int i = 0; i < inventory.nouns.Count && progressable; i++)
+		{
+			if (inventory.nouns[i].requiredInPage)
+			{
+				progressable = false;
+			}
+		}
+
+		// Prohibit progress if any action that prevents progress is capable of executing.
+		for (int i = 0; i < pages[pageIndex].nounPlacements.Count && progressable; i++)
+		{
+			NounPlacement nounPlacement = pages[pageIndex].nounPlacements[i];
+			if (nounPlacement.startAction != null && nounPlacement.startAction.blocksProgress && nounPlacement.noun.InPage)
+			{
+				if (nounPlacement.startAction.modifier != VerbTag.Relationship.INTERRUPT)
+				{
+					progressable = false;
+				}
+			}
+		}
+
+		return progressable;
+	}
+
+	public bool IsStoryEnd()
+	{
+		return pageIndex >= pages.Count - 1;
+	}
+
+	public void UpdatePageNumber()
+	{
+		if (pageNumberText != null)
+		{
+			pageNumberText.text = "" + (pageIndex + 1);
+			if (IsStoryEnd())
+			{
+				pageNumberText.color = Color.yellow;
+			}
+			else if (IsProgressable())
+			{
+				pageNumberText.color = Color.white;
+			}
+			else
+			{
+				pageNumberText.color = Color.red;
+			}
+		}
 	}
 }
 

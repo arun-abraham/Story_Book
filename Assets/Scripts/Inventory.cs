@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
 			noun.transform.parent = null;
 		}
 		noun.transform.localScale = scale;
-		noun.firstPage = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().PageIndex;
+		noun.firstPage = PageManager.Instance.PageIndex;
 
 		noun.DisplayInPage();
 

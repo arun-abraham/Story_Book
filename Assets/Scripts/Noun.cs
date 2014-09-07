@@ -6,16 +6,24 @@ public class Noun : MonoBehaviour {
 	public string id;
 	public bool possibleSubject;
 	public bool inInventory;
+	public bool InPage
+	{
+		get
+		{
+			return !inInventory && firstPage <= PageManager.Instance.PageIndex;
+		}
+	}
 	public GameObject container;
 	public GameObject outline;
 	public List<ObjectVerb> objectVerbs;
 	[HideInInspector]
 	public List<ObjectVerb> objectDefaultVerbs;
 	public int firstPage = -1;
+	public bool requiredInPage;
 
 	void Start () 
 	{
-		GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>().allNouns.Add(this);
+		PageManager.Instance.allNouns.Add(this);
 
 		if (container == null && transform.parent != null)
 		{
@@ -168,6 +176,12 @@ public class Noun : MonoBehaviour {
 			inInventory = true;
 		}
 
+		PageManager.Instance.UpdatePageNumber();
+		AffectNextPage();
+	}
+
+	public void AffectNextPage()
+	{
 		// TODO: Rather than checking page definitions, this should be based off of connected objects.
 		// Modify connected objects on the following page, depending on existence in page or inventory.
 		PageManager pageManager = GameObject.FindGameObjectWithTag("Globals").GetComponent<PageManager>();
@@ -204,6 +218,7 @@ public class ObjectVerb
 {
 	public Noun obj;
 	public Verb verb;
+	public bool blocksProgress;
 	public VerbTag.Relationship modifier;
 	public Noun modifiedBy;
 	

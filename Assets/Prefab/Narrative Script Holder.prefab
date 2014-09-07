@@ -1,0 +1,300 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400034}
+  - 114: {fileID: 11400032}
+  - 114: {fileID: 11400030}
+  - 114: {fileID: 11400028}
+  - 114: {fileID: 11400026}
+  - 114: {fileID: 11400024}
+  - 114: {fileID: 11400022}
+  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400018}
+  - 114: {fileID: 11400016}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400012}
+  m_Layer: 0
+  m_Name: Narrative Script Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0291546024, y: -.115219094, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Back in my day, we used to have to walk to school every day,
+    and it was uphill both ways!'
+  nextNar: {fileID: 11400034}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: That\u2019s nothing. Sit down and let me tell you what it
+    was like to get to school in my day."
+  nextNar: {fileID: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: and it was raining the whole way there!'
+  nextNar: {fileID: 11400002}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: So?'
+  nextNar: {fileID: 11400004}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: I missed the bus and had to walk all the way to school, so I
+    was late and the teacher was mad.'
+  nextNar: {fileID: 11400006}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: You''ve been moping around lately, what''s got you down sonny?'
+  nextNar: {fileID: 11400008}
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Take that you cowards! I could take any one of you one on
+    one!'
+  nextNar: {fileID: 0}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: Yeah! Wait...hmm, maybe that wasn\u2019t quite how it went.
+    Now, where was I?"
+  nextNar: {fileID: 0}
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: ...you died, Grandpa?'
+  nextNar: {fileID: 11400014}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: and then I died!'
+  nextNar: {fileID: 11400016}
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Then I was attacked by a pack of wolves! I told you those
+    walls were there for a reason.'
+  nextNar: {fileID: 0}
+--- !u!114 &11400022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandfather: Easy! I just pretended it wasn\u2019t even there."
+  nextNar: {fileID: 0}
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: So how did you get past it?'
+  nextNar: {fileID: 11400022}
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: To keep the wolves out, of course.'
+  nextNar: {fileID: 0}
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandson: Why would someone block the way to school?'
+  nextNar: {fileID: 11400026}
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Sometimes there were walls in the way, walls that went on
+    for miles!'
+  nextNar: {fileID: 11400028}
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: 'Grandfather: Oh it will, just you listen.'
+  nextNar: {fileID: 0}
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40048c7f59ed55c458f133ed97fb64fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narText: "Grandson: Both ways? That doesn\u2019t make any sense."
+  nextNar: {fileID: 11400032}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
